@@ -1,0 +1,15 @@
+# Xcode specific files
+*.xcworkspace
+*.xcodeproj
+xcuserdata/
+DerivedData/
+build/
+.idea/
+
+# Swift Playground specific files
+*.xcplayground
+timeline.xctimeline
+playground.xcworkspace
+
+# macOS system files
+.DS_Store
