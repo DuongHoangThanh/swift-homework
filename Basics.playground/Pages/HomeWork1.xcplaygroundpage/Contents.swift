@@ -1,101 +1,87 @@
-import UIKit
+//: [Previous](@previous)
 
-// Ex 1:
-print("---------------")
-var dictNested: [String: [String: Int]]
+import Foundation
+
+
+// Ex1
 func sumNestedDictionary(dict: [String: [String: Int]]) -> Int {
-    var sum = 0
-    //    #Solution 1
-    //    for i in dict {
-    //        for k in i.value {
-    //            sum += k.value
-    //        }
-    //    }
-    
-    for (_ , innerDict) in dict {
-        for (_ , value) in innerDict {
-            sum += value
+    var total = 0
+    for (_ , innnerDict) in dict {
+        for (_ , value) in innnerDict {
+            total += value
         }
     }
-    
-    return sum
+    return total
 }
-dictNested = ["Math": ["score": 9], "English": ["score": 9], "Literature": ["score": 7]]
-let sum = sumNestedDictionary(dict: dictNested)
-print(sum)
+let resultSum = sumNestedDictionary(dict: ["Math": ["Score": 9], "English": ["Score": 9], "Literature": ["Score": 7]])
+print(resultSum)
 
 
-// Ex 2:
-print("---------------")
+// Ex2
+print("--------------")
 func getValue(forKey: String, dict: [String: Int]) {
     guard let value = dict[forKey] else {
-        print("Key not found")
+        print("Key not found!")
         return
     }
-    print(value)
+    print("With Key = \(forKey) => Value = \(value)")
 }
-let dict1 = ["Math": 9, "English": 7, "Literature": 6]
-getValue(forKey: "Math", dict: dict1)
+getValue(forKey: "Literature", dict: ["Math": 9, "English": 9])
 
 
 // Ex3
-print("---------------")
+print("--------------")
 func validateUser(dict: [String: Any]) -> String {
-    guard let username = dict["username"],
-          let password = dict["password"],
-          let age = dict["age"] as? Int, // age is still of type Any
-          age >= 18
-    else {
-        return "The user is not valid or age is less than 18"
+    // dict[] = is a value optional
+    guard (dict["username"] != nil),
+          (dict["password"] != nil),
+          let age = dict["age"] as? Int,
+          age > 18 else {
+        return "Error"
     }
-    return "Username: \(username) - Password: \(password) - Age: \(age)"
+    return "Oke"
 }
-let dict2: [String: Any] = ["username": "HT", "password": "123", "age": 21]
-print(validateUser(dict: dict2))
+let resultValidateUser = validateUser(dict: ["username": "DHT", "password": "123", "age": 21])
+print(resultValidateUser)
+
 
 // Ex4
-print("---------------")
-func isSubset2(setA: Set<Int>, setB: Set<Int>) -> Bool {
+print("--------------")
+func isSubSet2(setA: Set<Int>, setB: Set<Int>) -> Bool {
     for element in setA {
-        if !setB.contains(element) {
-            false
+        guard setB.contains(element) else {
+            return false
         }
     }
     return true
 }
-let setA: Set<Int> = [1, 2, 4, 6, 7, 9]
-let setB: Set<Int> = [2, 4, 6]
-let result = isSubset2(setA: setA, setB: setB)
-print(result)
+
+func isSubSet(setA: Set<Int>, setB: Set<Int>) -> Bool {
+    return setA.isSubset(of: setB)
+}
+let resultIsSubSet = isSubSet(setA: [1, 3, 5], setB: [4, 6, 1, 3, 5])
+let resultIsSubSet2 = isSubSet2(setA: [1, 3, 5, 8], setB: [4, 6, 1, 3, 5])
+print(resultIsSubSet2)
 
 
 // Ex5
-print("---------------")
-var arrayDict = [
-    ["a": 1, "b": 2, "c": 3],
-    ["d": 2, "e": 1, "f": 1]
-]
-func groupByValue(arr: [[String: Int]]) -> [Int: [String]] {
+print("--------------")
+func groupByValue(dict: [String: Int]) -> [Int: [String]] {
     var result: [Int: [String]] = [:]
-    
-    for dict in arr {
-        for (key, value) in dict {
-            if result[value] != nil {
-                result[value]?.append(key)
-            } else {
-                result[value] = [key]
-            }
+    for (key, value) in dict {
+        if result[value] != nil {
+            result[value]?.append(key)
+        } else {
+            result[value] = [key]
         }
     }
-    
     return result
 }
-print(groupByValue(arr: arrayDict))
-
-
+let resultGroupValue = groupByValue(dict: ["a": 1, "b": 2, "c": 1, "d": 2, "e": 3])
+print(resultGroupValue)
 
 // Ex6
-print("---------------")
+print("--------------")
 func smallestSubset(set: Set<Int>, target: Int) -> Set<Int>? {
     let sortedArr = set.sorted(by: >)  // Sắp xếp các phần tử theo thứ tự giảm dần.
     var bestSubset: Set<Int>? = nil
@@ -135,19 +121,17 @@ if let result = smallestSubset(set: testSet, target: target) {
 }
 
 
-
 // Ex7
-print("---------------")
+print("--------------")
 func removeInvalidKeys(dict: [String: Int]) -> [String: Int] {
     var result: [String: Int] = [:]
     for (key, value) in dict {
-        guard key.count >= 3, key.count <= 10 else {
+        guard (key.count >= 3), (key.count <= 10) else {
             continue
         }
         result[key] = value
     }
-    
     return result
 }
- 
-print(removeInvalidKeys(dict: ["hkasdf": 123, "as": 213, "dsd": 22]))
+let resultRemoveInvalidKeys = removeInvalidKeys(dict: ["Math": 9, "as": 7, "asdasdj": 12])
+print(resultRemoveInvalidKeys)
