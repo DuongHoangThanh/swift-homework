@@ -135,3 +135,36 @@ func removeInvalidKeys(dict: [String: Int]) -> [String: Int] {
 }
 let resultRemoveInvalidKeys = removeInvalidKeys(dict: ["Math": 9, "as": 7, "asdasdj": 12])
 print(resultRemoveInvalidKeys)
+
+// Summary
+
+// Array:
+var numbers = [1, 2]
+let check = numbers.isEmpty // return bool
+let count = numbers.count // return Int,
+let first = numbers.first
+let last = numbers.last
+numbers.append(2) // add a new element at the end of the array
+numbers.append(contentsOf: [3, 4])
+numbers.insert(100, at: 3) // insert a new element at the specified position
+numbers.contains(2)
+numbers.sort(by: >)
+numbers.sorted(by: >)
+numbers.reverse()
+let numbersNew = numbers.map({ $0*2 })
+numbers.filter({ $0>2 })
+numbers.reduce(0, +)
+
+
+// Set:
+var sets: Set<Int> = [1, 2, 3]
+var sets2: Set<Int> = [3, 4, 5]
+var sets3 = sets.union(sets2) // return a new set with the elements of both set
+var sets4 = sets.intersection(sets2) // return a new set with the elements that are common to both set
+
+// Dictionary
+var dicts: [String: Any] = ["username": "DHT", "password": 123, "age": 21]
+dicts.removeValue(forKey: "age")
+let checkDict = dicts.contains(where: {(key, value) in return key.count > 2})
+print(checkDict)
+

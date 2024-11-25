@@ -19,25 +19,7 @@ if let closest = findClosest(to: target, in: numbers) {
 }
 
 // Ex1.2
-func findClosest2(to value: Int, in numbers: [Int?]) -> Int? {
-    var closest: Int?
-    var smallestDiff: Int?
-    
-    for item in numbers {
-        if let num = item { // use optional binding to get value from numbes
-            let diff = abs(num - value)
-            if let smallestDiffcur = smallestDiff { // use optional binding to extract the value
-                if diff < smallestDiffcur {
-                    closest = num
-                    smallestDiff = diff
-                }
-            } else {
-                closest = num
-                smallestDiff = diff
-            }
-        }
-    }
-    
-    return closest
-}
-
+let arrayEx1 = [4, 7, 1, 3, 2, 5, 9, 8]
+let arraySorted = arrayEx1.sorted(by: {$0 > $1})
+let arrayNew = arrayEx1.map({$0*3})
+print("Original: \(arrayEx1) \nSorted: \(arraySorted) \nNewArray: \(arrayNew)")
