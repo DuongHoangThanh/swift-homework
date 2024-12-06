@@ -136,7 +136,24 @@ func removeInvalidKeys(dict: [String: Int]) -> [String: Int] {
 let resultRemoveInvalidKeys = removeInvalidKeys(dict: ["Math": 9, "as": 7, "asdasdj": 12])
 print(resultRemoveInvalidKeys)
 
-// Summary
+
+
+
+// Summary //
+
+
+// Constants and Variables:
+let constantName:String = "Duong Hoang Thanh"
+// constantName = "Hoang Thanh" : Values cannot change after being assigned
+var variableName:Int = 123
+variableName = 1306
+
+
+// Operator:
+let sum = 10 + 5
+let isEqual = 5 == 5
+print(isEqual)
+
 
 // Array:
 var numbers = [1, 2]
@@ -162,9 +179,12 @@ var sets2: Set<Int> = [3, 4, 5]
 var sets3 = sets.union(sets2) // return a new set with the elements of both set
 var sets4 = sets.intersection(sets2) // return a new set with the elements that are common to both set
 
-// Dictionary
+
+// Dictionary:
 var dicts: [String: Any] = ["username": "DHT", "password": 123, "age": 21]
 dicts.removeValue(forKey: "age")
 let checkDict = dicts.contains(where: {(key, value) in return key.count > 2})
 print(checkDict)
+
+
 
