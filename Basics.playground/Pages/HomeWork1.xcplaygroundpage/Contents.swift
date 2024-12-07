@@ -80,6 +80,7 @@ func groupByValue(dict: [String: Int]) -> [Int: [String]] {
 let resultGroupValue = groupByValue(dict: ["a": 1, "b": 2, "c": 1, "d": 2, "e": 3])
 print(resultGroupValue)
 
+
 // Ex6
 print("--------------")
 func smallestSubset(set: Set<Int>, target: Int) -> Set<Int>? {
@@ -152,7 +153,10 @@ variableName = 1306
 // Operator:
 let sum = 10 + 5
 let isEqual = 5 == 5
-print(isEqual)
+
+let isLoggedIn = true
+let isPermission = false
+let canAccess = isLoggedIn && isPermission
 
 
 // Array:
