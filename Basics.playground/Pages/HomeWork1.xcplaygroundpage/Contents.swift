@@ -159,6 +159,7 @@ let isPermission = false
 let canAccess = isLoggedIn && isPermission
 
 
+// Overview 18/12/2024
 // Array:
 var numbers = [1, 2]
 let check = numbers.isEmpty // return bool
@@ -180,6 +181,9 @@ numbers.reduce(0, +)
 // Set:
 var sets: Set<Int> = [1, 2, 3]
 var sets2: Set<Int> = [3, 4, 5]
+sets.insert(123)
+sets.update(with: 6)
+
 var sets3 = sets.union(sets2) // return a new set with the elements of both set
 var sets4 = sets.intersection(sets2) // return a new set with the elements that are common to both set
 
@@ -189,6 +193,133 @@ var dicts: [String: Any] = ["username": "DHT", "password": 123, "age": 21]
 dicts.removeValue(forKey: "age")
 let checkDict = dicts.contains(where: {(key, value) in return key.count > 2})
 print(checkDict)
+let newDict = dicts.mapValues({
+    (value) in return "value: \(value)"
+})
+print(newDict)
+
+
+// Overview Homework
+func sumNestedDictionary2(dict: [String: [String: Int]]) -> Int {
+    var sum = 0
+    for item in dict {
+        for (key, value) in item.value {
+            sum += value
+        }
+    }
+    
+    return sum
+}
+
+var sum123 = sumNestedDictionary2(dict: ["Swift4": ["Thanh": 9, "Hau": 8, "Son": 10], "Objective-c": ["Thanh": 7, "Hau": 6, "Son": 5]])
+print(sum123)
+
+//
+func getValue2(forKey: String, dict: [String: Int]) -> String {
+    guard let value = dict["\(forKey)"] else { return "Error!" }
+    return String(value)
+}
+var valueDict = getValue2(forKey: "chanh", dict: ["thanh": 12, "chanh": 23])
+
+func validateUser2(dict: [String: Any]) -> String {
+    guard (dict["username"] != nil),
+          (dict["password"] != nil),
+          let age = dict["age"],
+          age as! Int > 18
+    else {
+        return "Error"
+    }
+    
+    return "Success!"
+}
+validateUser2(dict: ["username": "DHT", "password": "123", "age": 12])
+
+//
+func isSubset2(setA: Set<Int>, setB: Set<Int>) -> Bool {
+    return setA.isSubset(of: setB)
+}
+isSubset2(setA: [1, 5, 6], setB: [1, 5, 6, 2, 7])
+
+//
+func groupByValue2(arr: [[String: Int]]) -> [Int: [String]] {
+    var result: [Int: [String]] = [:]
+    for item in arr {
+        for (key, value) in item {
+            if var keyResult = result[value] {
+                result[value]?.append(key)
+            } else {
+                result[value] = [key]
+            }
+        }
+    }
+    return result
+}
+
+var result123 = groupByValue2(arr: [["thanh": 1, "chanh": 1, "Tinh": 2, "Sang": 3, "Duyen": 2], ["Toan": 10, "Van": 9, "Anh": 9]])
+print(result123)
+
+//
+func findSmallestSubset(numbers: [Int], target: Int) -> [Int]? {
+    // Bước 1: Sắp xếp mảng theo thứ tự giảm dần
+    let sortedNumbers = numbers.sorted(by: >)
+    
+    // Biến lưu kết quả tốt nhất (ít phần tử nhất)
+    var bestSubset: [Int]? = nil
+    
+    // Hàm đệ quy để tìm tập hợp con
+    func backtrack(currentSubset: [Int], currentIndex: Int, currentSum: Int) {
+        // Nếu tổng hiện tại >= target
+        if currentSum >= target {
+            // Cập nhật kết quả nếu tốt hơn
+            if bestSubset == nil || currentSubset.count < bestSubset!.count {
+                bestSubset = currentSubset
+            }
+            return
+        }
+        
+        // Duyệt qua các phần tử còn lại trong mảng
+        for i in currentIndex..<sortedNumbers.count {
+            // Thêm phần tử vào tập hợp con hiện tại
+            let nextNumber = sortedNumbers[i]
+            backtrack(
+                currentSubset: currentSubset + [nextNumber],
+                currentIndex: i + 1,
+                currentSum: currentSum + nextNumber
+            )
+        }
+    }
+    
+    // Bắt đầu đệ quy
+    backtrack(currentSubset: [], currentIndex: 0, currentSum: 0)
+    
+    return bestSubset
+}
+
+// Ví dụ sử dụng
+let numbers3 = [1, 2, 3, 4]
+let target3 = 5
+if let result = findSmallestSubset(numbers: numbers3, target: target3) {
+    print("Kết quả: \(result)")
+} else {
+    print("Không tìm thấy tập hợp con nào thoả mãn.")
+}
+
+print("======")
+
+//
+func removeInvalidKeys2(dict: [String: Int]) -> [String: Int] {
+    var result: [String: Int] = [:]
+    
+    for (key, value) in dict {
+        guard key.count > 3, key.count < 10 else {
+            continue
+        }
+        result[key] = value
+    }
+
+    return result
+}
+removeInvalidKeys2(dict: ["thanh": 9, "NT": 0, "Chanh": 12])
 
 
 
