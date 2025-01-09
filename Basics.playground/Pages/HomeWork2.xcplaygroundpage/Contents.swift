@@ -3,6 +3,7 @@
 import Foundation
 
 
+
 // Ex16:
 
 func findCommonElement2(_ data1: [[[Int?]?]?]?,  _ data2: [[[Int?]?]?]?) -> Int? {
