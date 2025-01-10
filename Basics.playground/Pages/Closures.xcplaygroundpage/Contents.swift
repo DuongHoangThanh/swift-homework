@@ -39,20 +39,20 @@ var company = Company()
 company.employee = person1  // `employee` giữ tham chiếu yếu tới `person1`
 person1 = nil               // Đối tượng `Person` được giải phóng
 company.employee
-print(company.employee)
+print(company.employee!)
 
 
 
-func fetchData(completion: (String) -> Void) {
-    print("Load data from Server ... ")
-    sleep(1)
-    var data = "Data from server"
+func fetchData(_ completion: (String) -> Void) {
+    
+    let url = "https://revme.com/api"
+    let data = "Data from Server!"
     completion(data)
 }
 
-fetchData { (data) in
-    let handled = "Handled data: \(data)"
-    print(handled)
+fetchData {
+    (data) in
+    print("Handled Data")
 }
 
 
