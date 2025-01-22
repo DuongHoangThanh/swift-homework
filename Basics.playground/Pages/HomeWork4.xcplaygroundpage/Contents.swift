@@ -3,6 +3,72 @@
 import Foundation
 
 
+// Ex3.2:
+class Room2 {
+    var roomNumber: Int
+    var type: String
+    var price: Double
+    var isAvailable: Bool
+    
+    init(roomNumber: Int, type: String, price: Double, isAvailable: Bool = true) {
+        self.roomNumber = roomNumber
+        self.type = type
+        self.price = price
+        self.isAvailable = isAvailable
+    }
+}
+
+class Reservation2 {
+    var guestName: String
+    var room: Room2
+    var checkInDate: Date
+    var checkOutDate: Date
+    
+    init(guestName: String, room: Room2, checkInDate: Date, checkOutDate: Date) {
+        self.guestName = guestName
+        self.room = room
+        self.checkInDate = checkInDate
+        self.checkOutDate = checkOutDate
+    }
+}
+
+class Hotel2 {
+    var rooms: [Room2] = []
+    var reservations: [Reservation2] = []
+    
+    func addRoom(room: Room2) {
+        rooms.append(room)
+        print("Room has been added.")
+    }
+    
+    func makeReservation(guestName: String, roomNumber: Int, checkInDate: Date, checkOutDate: Date) {
+        if let rooom = rooms.first(where: {$0.roomNumber == roomNumber}) {
+            if rooom.isAvailable {
+                let reservation = Reservation2(guestName: guestName, room: rooom, checkInDate: checkInDate, checkOutDate: checkOutDate)
+                reservations.append(reservation)
+                rooom.isAvailable = false
+                print("Successful")
+            } else {
+                print("Room not available")
+            }
+        }
+    }
+    
+    func checkRoom(roomNumber: Int) {
+        if let room = rooms.first(where: {$0.roomNumber == roomNumber}) {
+            if room.isAvailable {
+                print("Available.")
+            } else {
+                print("Not available.")
+            }
+        } else {
+            print("RoomNumber not exist.")
+        }
+    }
+        
+}
+
+
 
 // Ex4:
 class Event {
@@ -77,7 +143,7 @@ if let eventStart = dateFormatter.date(from: "2025-02-01 11:00"),
    let eventEnd = dateFormatter.date(from: "2025-02-01 13:00") {
     let event2 = Event(title: "Project Discussion", startTime: eventStart, endTime: eventEnd, location: "Room 101")
     calendar.addEvent(event: event2)
-}   
+}
 
 calendar.displayEvents()
 
