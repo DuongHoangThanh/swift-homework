@@ -76,7 +76,7 @@ class MessageObserver: MessageSenderDelegate {
 
 let messageSender = MessageSender()
 let messageObserver = MessageObserver()
-func messageSender;.delegate = messageObserver
+messageSender.delegate = messageObserver
 messageSender.send(message: "Hello, my name is Thanh")
 
 
@@ -121,7 +121,7 @@ class DownloadObserver: DownloadManagerDelegate {
 let downloadObServer = DownloadObserver()
 
 let downloadManager = DownloadManager()
-    func downloadManager;.delegate = downloadObServer
+downloadManager.delegate = downloadObServer
 downloadManager.startDownload()
 
 
